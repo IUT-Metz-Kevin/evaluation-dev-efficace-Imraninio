@@ -3,10 +3,13 @@ import { assertEquals } from "jsr:@std/assert";
 
 function mineSwepper(ms: string): string{
     let mineSweeperStr = '';
-    for(let i = 0; i < ms.length +1; i++){
+    for(let i = 0; i < ms.length + 1; i++){
         if(ms[i] === '.'){
             if(i != 0){
-                if(ms[i-1] === '*'){
+                if(ms[i-1] === "*" && ms[i+1] === "*"){
+                    mineSweeperStr += '2';
+                }
+                else if(ms[i-1] === '*'){
                     mineSweeperStr += '1';    
                 }
                 else{
