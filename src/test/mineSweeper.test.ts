@@ -2,31 +2,32 @@ import { assertEquals } from "jsr:@std/assert";
 
 
 function mineSwepper(ms: string): string{
-    let tabMineSwepper = ms.split('\n');
+    const tabMineSwepper = ms.split('\n');
     let mineSweeperStr = "";
-    for(let i = 0; i < tabMineSwepper.length; i++){
-        for(let j = 0; j < tabMineSwepper[i].length + 1; j++){
-                if(tabMineSwepper[i][j] === '.'){
+    let i = 1;
+    for(const ligne of tabMineSwepper){
+        for(let j = 0; j < ligne.length + 1; j++){
+                if(ligne[j] === '.'){
                     if(j != 0){
-                        if(tabMineSwepper[i][j-1] === "*" && tabMineSwepper[i][j+1] === "*"){
+                        if(ligne[j-1] === "*" && ligne[j+1] === "*"){
                             mineSweeperStr += '2';
                         }
-                        else if(tabMineSwepper[i][j-1] === '*'){
+                        else if(ligne[j-1] === '*'){
                             mineSweeperStr += '1';    
                         }
                         else{
                             mineSweeperStr += '0';
                         }
                     }
-                    else if(j+1 < tabMineSwepper[i].length ){
-                        if(tabMineSwepper[i][j+1] === '*'){
+                    else if(j+1 < ligne.length ){
+                        if(ligne[j+1] === '*'){
                             mineSweeperStr += '1';    
                         }
                         else{
                             mineSweeperStr += '0';
                         }
                     }
-                else if(tabMineSwepper[i][j+1] === '*'){
+                else if(ligne[j+1] === '*'){
                     mineSweeperStr += '1';
                 }
                 else{
@@ -34,18 +35,19 @@ function mineSwepper(ms: string): string{
                 }
 
             }
-            else if(tabMineSwepper[i][j] === '*'){
+            else if(ligne[j] === '*'){
                 mineSweeperStr += '*'
             }
         }
-        if(tabMineSwepper.length > 1 && i < tabMineSwepper.length - 1){
-            mineSweeperStr += '\n'    
+        console.log(tabMineSwepper.length, i)
+        if(tabMineSwepper.length > 1 && tabMineSwepper.length > i){
+            mineSweeperStr += '\n';
         }
+        i++;
     }
     return mineSweeperStr;
 }
 
-console.log(mineSwepper(".\n."))
 
 Deno.test({ name: "Test mineSweeper avec 1 point", fn(){
         assertEquals(mineSwepper('.'), '0')
