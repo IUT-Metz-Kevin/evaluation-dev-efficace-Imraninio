@@ -35,8 +35,14 @@ Deno.test({ name: "Test mineSweeper avec 1 mine", fn(){
     }
 })
 
-Deno.test({ name: "Test mineSweeper avec 6 mine", fn(){
+Deno.test({ name: "Test mineSweeper avec 6 mines", fn(){
         assertEquals(mineSwepper('******'), '******')
     }
 })
+
+Deno.test({ name: "Test mineSweeper avec 6 mines", fn(){
+        assertEquals(mineSwepper('*.'), '*1')
+    }
+})
+
 
