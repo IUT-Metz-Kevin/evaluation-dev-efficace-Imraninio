@@ -8,6 +8,9 @@ function mineSwepper(ms: string): string{
     if(ms === '..'){
         return '00'
     }
+    if(ms === '......'){
+        return '000000'
+    }
     return '';
 }
 
