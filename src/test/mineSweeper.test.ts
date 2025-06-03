@@ -1,6 +1,5 @@
 import { assertEquals } from "jsr:@std/assert";
 
-// en effet, j'ai fait un sacré changement entre ce commit et le précédent (je n'ai pas réussi à faire mieux)
 function mineSwepper(ms: string): string{
     const tabMineSwepper = ms.split('\n');
     let mineSweeperStr = "";
@@ -79,18 +78,17 @@ Deno.test({ name: "Test mineSweeper avec 2 mines et 1 point", fn(){
     }
 })
 
-Deno.test({ name: "Test mineSweeper avec 2 tabMineSwepper[i]s", fn(){
+Deno.test({ name: "Test mineSweeper avec 2 lignes", fn(){
         assertEquals(mineSwepper(".\n."), "0\n0")
     }
 })
 
-Deno.test({ name: "Test mineSweeper avec 2 tabMineSwepper[i]s", fn(){
+Deno.test({ name: "Test mineSweeper avec 3 bombes", fn(){
         assertEquals(mineSwepper("**\n*."), "**\n*3")
     }
 })
-
-/*      
-* *     0,0   0,1
-
-* 3     1,0   1,1
-*/  
+ 
+Deno.test({ name: "Test mineSweeper avec plusieurs lignes et plusieurs bombes", fn(){
+        assertEquals(mineSwepper(".*.**.\n....*.\n..*..."), "1*2**2\n1234*2\n01*211")
+    }
+})
