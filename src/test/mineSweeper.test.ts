@@ -14,11 +14,15 @@ function mineSwepper(ms: string): string{
 
 Deno.test({ name: "Test mineSweeper avec 1 point", fn(){
         assertEquals(mineSwepper('.'), '0')
-        assertEquals(mineSwepper('..'), '00')
     }
 })
 
 Deno.test({ name: "Test mineSweeper avec 2 points", fn(){
         assertEquals(mineSwepper('..'), '00')
+    }
+})
+
+Deno.test({ name: "Test mineSweeper avec 6 points", fn(){
+        assertEquals(mineSwepper('......'), '000000')
     }
 })
