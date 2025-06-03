@@ -2,42 +2,50 @@ import { assertEquals } from "jsr:@std/assert";
 
 
 function mineSwepper(ms: string): string{
-    let mineSweeperStr = '';
-    for(let i = 0; i < ms.length + 1; i++){
-        if(ms[i] === '.'){
-            if(i != 0){
-                if(ms[i-1] === "*" && ms[i+1] === "*"){
-                    mineSweeperStr += '2';
-                }
-                else if(ms[i-1] === '*'){
-                    mineSweeperStr += '1';    
+    let tabMineSwepper = ms.split('\n');
+    let mineSweeperStr = "";
+    for(let i = 0; i < tabMineSwepper.length; i++){
+        for(let j = 0; j < tabMineSwepper[i].length + 1; j++){
+                if(tabMineSwepper[i][j] === '.'){
+                    if(j != 0){
+                        if(tabMineSwepper[i][j-1] === "*" && tabMineSwepper[i][j+1] === "*"){
+                            mineSweeperStr += '2';
+                        }
+                        else if(tabMineSwepper[i][j-1] === '*'){
+                            mineSweeperStr += '1';    
+                        }
+                        else{
+                            mineSweeperStr += '0';
+                        }
+                    }
+                    else if(j+1 < tabMineSwepper[i].length ){
+                        if(tabMineSwepper[i][j+1] === '*'){
+                            mineSweeperStr += '1';    
+                        }
+                        else{
+                            mineSweeperStr += '0';
+                        }
+                    }
+                else if(tabMineSwepper[i][j+1] === '*'){
+                    mineSweeperStr += '1';
                 }
                 else{
-                    mineSweeperStr += '0';
+                    mineSweeperStr += '0'
                 }
+
             }
-            else if(i+1 < ms.length ){
-                if(ms[i+1] === '*'){
-                    mineSweeperStr += '1';    
-                }
-                else{
-                    mineSweeperStr += '0';
-                }
-            }
-            else if(ms[i+1] === '*'){
-                mineSweeperStr += '1'; 
-            }
-            else{
-                mineSweeperStr += '0';
+            else if(tabMineSwepper[i][j] === '*'){
+                mineSweeperStr += '*'
             }
         }
-        else if(ms[i] === '*'){
-            mineSweeperStr += '*'
+        if(tabMineSwepper.length > 1 && i < tabMineSwepper.length - 1){
+            mineSweeperStr += '\n'    
         }
     }
     return mineSweeperStr;
 }
 
+console.log(mineSwepper(".\n."))
 
 Deno.test({ name: "Test mineSweeper avec 1 point", fn(){
         assertEquals(mineSwepper('.'), '0')
@@ -80,7 +88,7 @@ Deno.test({ name: "Test mineSweeper avec 2 mines et 1 point", fn(){
 })
 
 Deno.test({ name: "Test mineSweeper avec 2 lignes", fn(){
-        assertEquals(mineSwepper('.\n.'), '0\n0')
+        assertEquals(mineSwepper(".\n."), "0\n0")
     }
 })
 
