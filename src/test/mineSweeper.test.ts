@@ -2,22 +2,16 @@ import { assertEquals } from "jsr:@std/assert";
 
 
 function mineSwepper(ms: string): string{
-    if(ms === '.'){
-        return '0';
+    let mineSweeperStr = '';
+    for(let i = 0; i < ms.length +1; i++){
+        if(ms[i] === '.'){
+            mineSweeperStr += '0'
+        }
+        else if(ms[i] === '*'){
+            mineSweeperStr += '*'
+        }
     }
-    if(ms === '..'){
-        return '00'
-    }
-    if(ms === '......'){
-        return '000000'
-    }
-    if(ms === '*'){
-        return '*'
-    }
-    if(ms === '******'){
-        return '******'
-    }
-    return '';
+    return mineSweeperStr;
 }
 
 
