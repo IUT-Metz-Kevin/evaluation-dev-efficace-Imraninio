@@ -1,38 +1,31 @@
 import { assertEquals } from "jsr:@std/assert";
 
-
+// en effet, j'ai fait un sacré changement entre ce commit et le précédent (je n'ai pas réussi à faire mieux)
 function mineSwepper(ms: string): string{
     const tabMineSwepper = ms.split('\n');
     let mineSweeperStr = "";
     for(let i = 0; i < tabMineSwepper.length; i++){
         for(let j = 0; j < tabMineSwepper[i].length + 1; j++){                          
+            let nbBombesAutour = 0;
                 if(tabMineSwepper[i][j] === '.'){
-                    if(j != 0){
-                        if(tabMineSwepper[i][j-1] === "*" && tabMineSwepper[i][j+1] === "*"){
-                            mineSweeperStr += '2';
+                    for(let k = 0; k < j+2; k++){
+                        if(tabMineSwepper[i][k] === "*"){
+                            nbBombesAutour++;
                         }
-                        else if(tabMineSwepper[i][j-1] === '*'){
-                            mineSweeperStr += '1';    
-                        }
-                        else{
-                            mineSweeperStr += '0';
-                        }
-                    }
-                    else if(j+1 < tabMineSwepper[i].length ){
-                        if(tabMineSwepper[i][j+1] === '*'){
-                            mineSweeperStr += '1';    
-                        }
-                        else{
-                            mineSweeperStr += '0';
-                        }
-                    }
-                else if(tabMineSwepper[i][j+1] === '*'){
-                    mineSweeperStr += '1';
-                }
-                else{
-                    mineSweeperStr += '0'
-                }
 
+                        if(i<tabMineSwepper.length-1){
+                            if(tabMineSwepper[i+1][k] === "*"){
+                                nbBombesAutour++;
+                            }
+                        }
+
+                        if(i>0){
+                            if(tabMineSwepper[i-1][k] === "*"){
+                                nbBombesAutour++;
+                            }
+                        }
+                    }
+                    mineSweeperStr+= nbBombesAutour.toString()
             }
             else if(tabMineSwepper[i][j] === '*'){
                 mineSweeperStr += '*'
