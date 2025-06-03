@@ -9,8 +9,9 @@ function mineSwepper(ms: string): string{
 }
 
 
-Deno.test({ name: "test simple avec une ligne", fn(){
+Deno.test({ name: "Test mineSweeper", fn(){
         assertEquals(mineSwepper('.'), '0')
+        assertEquals(mineSwepper('..'), '00')
     }
     
 })
