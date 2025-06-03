@@ -6,25 +6,25 @@ function mineSwepper(ms: string): string{
     for(let i = 0; i < tabMineSwepper.length; i++){
         for(let j = 0; j < tabMineSwepper[i].length + 1; j++){                          
             let nbBombesAutour = 0;
-                if(tabMineSwepper[i][j] === '.'){
-                    for(let k = 0; k < j+2; k++){
-                        if(tabMineSwepper[i][k] === "*"){
+            if(tabMineSwepper[i][j] === '.'){
+                for(let k = -1; k < 2; k++){
+                    if(tabMineSwepper[i][j+k] === "*"){
+                        nbBombesAutour++;
+                    }
+
+                    if(i<tabMineSwepper.length-1){
+                        if(tabMineSwepper[i+1][j+k] === "*"){
                             nbBombesAutour++;
                         }
+                    }
 
-                        if(i<tabMineSwepper.length-1){
-                            if(tabMineSwepper[i+1][k] === "*"){
-                                nbBombesAutour++;
-                            }
-                        }
-
-                        if(i>0){
-                            if(tabMineSwepper[i-1][k] === "*"){
-                                nbBombesAutour++;
-                            }
+                    if(i>0){
+                        if(tabMineSwepper[i-1][j+k] === "*"){
+                            nbBombesAutour++;
                         }
                     }
-                    mineSweeperStr+= nbBombesAutour.toString()
+                }
+                mineSweeperStr+= nbBombesAutour.toString()
             }
             else if(tabMineSwepper[i][j] === '*'){
                 mineSweeperStr += '*'
@@ -89,6 +89,7 @@ Deno.test({ name: "Test mineSweeper avec 3 bombes", fn(){
 })
  
 Deno.test({ name: "Test mineSweeper avec plusieurs lignes et plusieurs bombes", fn(){
-        assertEquals(mineSwepper(".*.**.\n....*.\n..*..."), "1*2**2\n1234*2\n01*211")
+        assertEquals(mineSwepper(".*.**.\n...*.\n..*..."), "1*2**2\n1234*2\n01*211")
     }
 })
+
