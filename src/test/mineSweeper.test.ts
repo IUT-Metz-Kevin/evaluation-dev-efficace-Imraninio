@@ -14,6 +14,9 @@ function mineSwepper(ms: string): string{
     if(ms === '*'){
         return '*'
     }
+    if(ms === '******'){
+        return '******'
+    }
     return '';
 }
 
