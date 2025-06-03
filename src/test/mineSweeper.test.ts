@@ -5,7 +5,12 @@ function mineSwepper(ms: string): string{
     let mineSweeperStr = '';
     for(let i = 0; i < ms.length +1; i++){
         if(ms[i] === '.'){
-            mineSweeperStr += '0'
+            if(ms[i-1] === '*'){
+                mineSweeperStr += '1';    
+            }
+            else{
+                mineSweeperStr += '0';
+            }
         }
         else if(ms[i] === '*'){
             mineSweeperStr += '*'
